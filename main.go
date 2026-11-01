@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	entries, err := os.ReadDir(".")
+	arguments := os.Args[1:]
+
+	entries, err := os.ReadDir(arguments[-1])
 	if err != nil {
 		println("Failed to Read current Dir")
 	}
