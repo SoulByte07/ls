@@ -9,17 +9,17 @@
 
 ## Phase 1: Scaffolding & Hello CLI  `+5%` `0.5hr`
 
-- [ ] **1.1** Initialize Go module
+- [x] **1.1** Initialize Go module
   - Run `go mod init github.com/user/ls-go` in project root
   - File: `go.mod`
   - **Done when**: `go.mod` exists with correct module name
 
-- [ ] **1.2** Create `main.go` with minimal CLI entry point
+- [x] **1.2** Create `main.go` with minimal CLI entry point
   - File: `main.go`
   - Key details: `package main`, `func main()`, `fmt.Println("hello")`
   - **Done when**: `go run .` prints "hello"
 
-- [ ] **1.3** Verify build and run workflow
+- [x] **1.3** Verify build and run workflow
   - Run `go build -o ls-go .` and `./ls-go`
   - **Done when**: Binary builds and runs successfully
 
@@ -27,12 +27,12 @@
 
 ## Phase 2: Read Directory & List Entries  `+15%` `1hr`
 
-- [ ] **2.1** Import `os` and use `os.ReadDir(".")`
+- [x] **2.1** Import `os` and use `os.ReadDir(".")`
   - File: `main.go`
   - Key details: Handle error returned by `ReadDir`, iterate `[]DirEntry`, print `entry.Name()`
   - **Done when**: Running `./ls-go` lists files in current directory (one per line)
 
-- [ ] **2.2** Accept directory path as positional argument
+- [!] **2.2** Accept directory path as positional argument
   - Use `os.Args[1:]` to get target directory (default to `"."`)
   - File: `main.go`
   - **Done when**: `./ls-go /some/path` lists that directory
