@@ -2,12 +2,15 @@ package main
 
 import (
 	"os"
+	"fmt"
 )
 
 func main() {
-	currentDir, err := os.ReadDir(".")
-	if err!=nil {
-		print("Failed to Read current Dir")
+	entries, err := os.ReadDir(".")
+	if err != nil {
+		println("Failed to Read current Dir")
 	}
-	print(currentDir)
+	for _, entry := range entries {
+		fmt.Println(entry)
+	}
 }
