@@ -1,4 +1,4 @@
-# ls-go
+# ls
 
 A minimal, from-scratch implementation of `ls` written in Go — built for learning the language, not for production.
 
@@ -17,12 +17,12 @@ This project is a self-guided exercise in Go fundamentals: modules, CLI parsing 
 go mod tidy
 
 # Build
-go build -o ls-go .
+go build -o ls .
 
 # Run
-./ls-go
-./ls-go -l -a /tmp
-./ls-go -R -lh
+./ls
+./ls -l -a /tmp
+./ls -R -lh
 ```
 
 ---
@@ -47,7 +47,7 @@ Colors are enabled automatically when stdout is a terminal.
 ## Project structure
 
 ```
-ls-go/
+ls/
 ├── docs/
 │   └── PLAN.md          # Phase-by-phase learning roadmap
 ├── main.go              # CLI entry point, flag parsing
