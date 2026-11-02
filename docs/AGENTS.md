@@ -5,7 +5,7 @@
 - Directory: `ls` (renamed from `ls-go`). Module in `go.mod`: `github.com/SoulByte07/ls`. Do not reference `github.com/user/ls-go`.
 - User writes all code. Agent acts as tutor/mentor only. Do not rewrite `main.go` without user approval.
 - `docs/PLAN.md` is the single source of truth for phases, milestones, and verification commands.
-- `main.go` currently panics on zero args (`arguments[-1]` with empty slice). Any agent testing should supply an argument or note the crash.
+- `main.go` handles zero args by defaulting to `.` (`arguments[-1]` is safe). Supply explicit path if testing non-current dir.
 
 ## Verified repo state
 
