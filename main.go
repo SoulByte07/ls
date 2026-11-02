@@ -1,17 +1,28 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"flag"
 )
 
 func main() {
+	// parse the flags
+	showLong := flag.Bool("l", false, "Show Long format")
+	showAll := flag.Bool("a", false, "Show Hidden files")
+	showHelp := flag.Bool("h", false, "Show Help Menu")
+	flag.Parse()
+
+	if *showHelp {
+		fmt.Println(flag.Usage)
+		os.Exit(0)
+	}
+
 	// get the arguments
-	arguments := os.Args[1:]
+	arguments := flag.Args()
 
 	// default to current dir
-	if len(arguments)==0 {
+	if len(arguments) == 0 {
 		arguments = append(arguments, ".")
 	}
 
@@ -20,35 +31,33 @@ func main() {
 	// error handling
 	if err != nil {
 		if os.IsNotExist(err) {
-			fmt.Printf("%s path doesn't exists", arguments[0])
-		} else {
-			println(err)
+			fmt.Fprintf(os.Stderr, "%s\n", err)
 		}
-		os.Exit(0)
+		os.Exit(1)
 	}
 
-	// flag: long format 
-	var showLong bool
-	flag.BoolVar(&showLong, "l", false, "Shows Long format")
-
-
-
+	// print
 	for _, entry := range entries {
-		fmt.Printf("%s \t", entry)
-		info, err := entry.Info()
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(0)
+		// showAll
+		if !*showAll && entry.Name()[0] == '.' && len(entry.Name()) > 0 {
+			continue
 		}
-		mode := info.Mode()
-		size := info.Size()
-		modTime := info.ModTime()
-		fmt.Printf("%s \t %d \t %s \n", mode, size, modTime)
+		// showlong
+		if *showLong {
+			info, err := entry.Info()
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "%s\n", err)
+				os.Exit(1)
+			}
+			mode := info.Mode()
+			modTime := info.ModTime().Format("Jan 01 13:00")
+			size := info.Size()
+			fmt.Printf("%s\t%s\t%d\t%s\n", entry.Name(), mode, size, modTime)
+		}
+		fmt.Printf("%s\n", entry.Name())
 	}
+	os.Exit(0)
 }
-
-
-
 
 
 
